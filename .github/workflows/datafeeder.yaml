@@ -1,0 +1,31 @@
+name: Build
+env:
+  GEORCHESTRA_VERSION: 21-0.SNAPSHOT
+on:
+  push:
+    branches:
+      - georchestra
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+    - name: "Checking out"
+      uses: actions/checkout@v1
+
+    - name: "Building docker image"
+      if: github.repository == 'georchestra/geonetwork-ui'
+      run: docker build -t georchestra/datafeeder-frontend:${{ env.GEORCHESTRA_VERSION }} .
+
+    - name: "Logging in to docker.io"
+      if: github.repository == 'georchestra/geonetwork-ui'
+      uses: azure/docker-login@v1
+      with:
+        username: '${{ secrets.DOCKER_HUB_USERNAME }}'
+        password: '${{ secrets.DOCKER_HUB_PASSWORD }}'
+
+    - name: "Pushing the docker image onto docker.io"
+      if: github.ref == 'refs/heads/georchestra' && github.repository == 'georchestra/geonetwork-ui'
+      run: |
+        docker push georchestra/datafeeder-frontend:${{ env.GEORCHESTRA_VERSION }}
+

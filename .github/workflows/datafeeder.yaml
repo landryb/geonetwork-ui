@@ -1,6 +1,6 @@
 name: Build
 env:
-  GEORCHESTRA_VERSION: 21-0.SNAPSHOT
+  GEORCHESTRA_VERSION: 21.0-SNAPSHOT
 on:
   push:
     branches:

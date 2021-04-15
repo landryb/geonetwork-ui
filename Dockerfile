@@ -5,7 +5,7 @@ WORKDIR /app
 COPY package.json ./
 RUN npm install
 COPY . ./
-RUN npm run build datafeeder
+RUN npm run build datafeeder -- --base-href='/import/'
 
 # Runner
 FROM nginx:1.16.0-alpine

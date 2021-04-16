@@ -7,6 +7,7 @@ on:
       - georchestra
 jobs:
   build:
+    if: github.repository == 'georchestra/geonetwork-ui'
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
@@ -28,4 +29,3 @@ jobs:
       if: github.ref == 'refs/heads/georchestra' && github.repository == 'georchestra/geonetwork-ui'
       run: |
         docker push georchestra/datafeeder-frontend:${{ env.GEORCHESTRA_VERSION }}
-

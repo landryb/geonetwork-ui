@@ -9,6 +9,7 @@ on:
 jobs:
   storybook-cleanup:
     runs-on: ubuntu-latest
+    if: github.repository == 'geonetwork/geonetwork-ui'
     steps:
       - name: Checkout
         uses: actions/checkout@v2
